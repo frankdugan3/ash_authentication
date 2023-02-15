@@ -219,27 +219,31 @@ defmodule AshAuthentication.Strategy.OAuth2 do
   #{Spark.Dsl.Extension.doc_entity(Dsl.dsl())}
   """
 
-  defstruct client_id: nil,
-            site: nil,
-            auth_method: :client_secret_post,
-            client_secret: nil,
-            authorize_url: nil,
-            token_url: nil,
-            user_url: nil,
-            private_key: nil,
-            redirect_uri: nil,
-            authorization_params: [],
-            registration_enabled?: true,
-            register_action_name: nil,
-            sign_in_action_name: nil,
-            identity_resource: false,
-            identity_relationship_name: :identities,
-            identity_relationship_user_id_attribute: :user_id,
-            provider: :oauth2,
-            name: nil,
-            resource: nil,
-            icon: nil,
-            assent_strategy: Assent.Strategy.OAuth2
+  @struct_fields [
+    client_id: nil,
+    site: nil,
+    auth_method: :client_secret_post,
+    client_secret: nil,
+    authorize_url: nil,
+    token_url: nil,
+    user_url: nil,
+    private_key: nil,
+    redirect_uri: nil,
+    authorization_params: [],
+    registration_enabled?: true,
+    register_action_name: nil,
+    sign_in_action_name: nil,
+    identity_resource: false,
+    identity_relationship_name: :identities,
+    identity_relationship_user_id_attribute: :user_id,
+    provider: :oauth2,
+    name: nil,
+    resource: nil,
+    icon: nil,
+    assent_strategy: Assent.Strategy.OAuth2
+  ]
+
+  defstruct @struct_fields
 
   alias AshAuthentication.Strategy.{Custom, OAuth2}
 
@@ -279,4 +283,8 @@ defmodule AshAuthentication.Strategy.OAuth2 do
   defdelegate dsl, to: Dsl
   defdelegate transform(strategy, dsl_state), to: Transformer
   defdelegate verify(strategy, dsl_state), to: Verifier
+
+  @doc false
+  @spec __struct_fields__ :: keyword
+  def __struct_fields__, do: @struct_fields
 end
