@@ -198,6 +198,13 @@ defmodule MyApp.Accounts.User do
   identities do
     identity :unique_email, [:email]
   end
+  
+   # If using policies, add the bypass:
+  # policies do
+  #   bypass AshAuthentication.Checks.AshAuthenticationInteraction do
+  #     authorize_if always()
+  #   end
+  # end
 end
 ```
 
